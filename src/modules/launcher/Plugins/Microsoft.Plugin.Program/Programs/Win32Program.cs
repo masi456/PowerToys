@@ -294,7 +294,7 @@ namespace Microsoft.Plugin.Program.Programs
                     AcceleratorModifiers = ModifierKeys.Control | ModifierKeys.Shift,
                     Action = _ =>
                     {
-                        Main.StartProcess(Process.Start, new ProcessStartInfo("explorer", ParentDirectory));
+                        Wox.Infrastructure.Helper.OpenInShell(ParentDirectory);
                         return true;
                     },
                 });
