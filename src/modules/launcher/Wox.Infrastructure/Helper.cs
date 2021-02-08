@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO.Abstractions;
 using System.Reflection;
@@ -118,7 +119,6 @@ namespace Wox.Infrastructure
             return Process.Start(processStartInfo);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "Suppressing this to enable FxCop. We are logging the exception, and going forward general exceptions should not be caught")]
         public static bool OpenInShell(string path, string arguments = null, string workingDir = null, bool runAsAdmin = false)
         {
             using (var process = new Process())
@@ -139,7 +139,7 @@ namespace Wox.Infrastructure
                     process.Start();
                     return true;
                 }
-                catch (System.Exception ex)
+                catch (Win32Exception ex)
                 {
                     Log.Exception($"Unable to open {path}: {ex.Message}", ex, MethodBase.GetCurrentMethod().DeclaringType);
                     return false;
